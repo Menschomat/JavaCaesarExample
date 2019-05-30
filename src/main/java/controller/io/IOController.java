@@ -1,4 +1,4 @@
-package controller;
+package controller.io;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,19 +11,19 @@ import java.util.stream.Collectors;
 
 public class IOController {
 
-    IOController() {
+    public IOController() {
     }
 
-    List<String> readInputFile(String path) {
+    public List<String> readInputFile(String path) {
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(path))) {
             return reader.lines().collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new ArrayList<String>();
+        return new ArrayList<>();
     }
 
-    void writeToOutput(String path, List<String> toWrite) {
+    public void writeToOutput(String path, List<String> toWrite) {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(path))) {
             toWrite.forEach(a -> {
                 try {

@@ -1,18 +1,20 @@
-package controller;
+package controller.encoding;
+
+import utils.Constants;
 
 import java.util.stream.Collectors;
 
 public class Encoder {
     Integer key = 0;
 
-    public Encoder() {
+    Encoder() {
     }
 
     Encoder(Integer key) {
         this.key = key;
     }
 
-    String encodeLine(String line) {
+    public String encodeLine(String line) {
         return line.chars()
                 .mapToObj(c -> (int) c)
                 .collect(Collectors.toList())
@@ -23,10 +25,10 @@ public class Encoder {
     }
 
     private Integer encodeNum(Integer in, Integer key) {
-        if (in >= Utils.BIG_LETTER_MIN && in <= Utils.BIG_LETTER_MAX)
-            return ((in + key) > Utils.BIG_LETTER_MAX) ? in + key - Utils.ABC_LEN : in + key;
-        else if (in >= Utils.SMALL_LETTER_MIN && in <= Utils.SMALL_LETTER_MAX)
-            return ((in + key) > Utils.SMALL_LETTER_MAX) ? in + key - Utils.ABC_LEN : in + key;
+        if (in >= Constants.BIG_LETTER_MIN && in <= Constants.BIG_LETTER_MAX)
+            return ((in + key) > Constants.BIG_LETTER_MAX) ? in + key - Constants.ABC_LEN : in + key;
+        else if (in >= Constants.SMALL_LETTER_MIN && in <= Constants.SMALL_LETTER_MAX)
+            return ((in + key) > Constants.SMALL_LETTER_MAX) ? in + key - Constants.ABC_LEN : in + key;
         return in;
     }
 
