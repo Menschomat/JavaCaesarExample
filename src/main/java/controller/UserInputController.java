@@ -8,10 +8,11 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class UserInputController {
-    private Encoder encoder = new AdvancedEncoder();
+    private AdvancedEncoder encoder = new AdvancedEncoder();
     private Scanner inputScanner = new Scanner(System.in);  // Create a Scanner object
 
     public UserInputController() {
+
         IOController ioController = new IOController();
         Integer mode = getMode();
         if (mode.equals(1)){
@@ -20,6 +21,9 @@ public class UserInputController {
         else if (mode.equals(2)){
             encoder.setKey(getKey()*(-1)); // For Decoding we want to shift the Letters in the opposite direction. That's why we make our key negative.
             ioController.writeToOutput(getOutput(), ioController.readInputFile(getPath()).stream().map(line -> encoder.encodeLine(line)).collect(Collectors.toList()));}
+        else if(mode.equals(3)){
+            ioController.writeToOutput(getOutput(),encoder.encodeGermanWithoutKey(ioController.readInputFile(getPath()).stream().map(line -> encoder.encodeLine(line)).collect(Collectors.toList())));
+        }
     }
 
     private String getPath() {
@@ -43,6 +47,7 @@ public class UserInputController {
         System.out.println("Enter Mode:");
         System.out.println("    Type 1 for Encode");
         System.out.println("    Type 2 for Decode");
+        System.out.println("    Type 3 for German-Autoencoding");
         return inputScanner.nextInt();
     }
 }

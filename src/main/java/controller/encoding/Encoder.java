@@ -15,10 +15,8 @@ public class Encoder {
     }
 
     public String encodeLine(String line) {
-        return line.chars()
-                .mapToObj(c -> (int) c)
-                .collect(Collectors.toList())
-                .stream().map(num -> encodeNum(num, key))
+        return line.chars().boxed()
+                .map(num -> encodeNum(num, key))
                 .map(num -> (char) num.intValue())
                 .map(String::valueOf)
                 .collect(Collectors.joining());
